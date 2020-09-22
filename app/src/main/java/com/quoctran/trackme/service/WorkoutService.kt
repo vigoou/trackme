@@ -14,7 +14,6 @@ import com.quoctran.trackme.R
 import com.quoctran.trackme.data.WorkoutPreference
 import com.quoctran.trackme.util.getLocationText
 import com.quoctran.trackme.util.getLocationTitle
-import com.quoctran.trackme.util.requestingLocationUpdates
 
 class WorkoutService : Service() {
 

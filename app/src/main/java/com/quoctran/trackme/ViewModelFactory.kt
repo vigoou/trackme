@@ -5,8 +5,10 @@ import android.app.Application
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.quoctran.trackme.data.source.WorkoutDataSource
 import com.quoctran.trackme.data.source.WorkoutRepository
+import com.quoctran.trackme.data.source.local.WorkoutDatabase
+import com.quoctran.trackme.data.source.local.WorkoutLocalDataSource
+import com.quoctran.trackme.util.AppExecutors
 import com.quoctran.trackme.workout.WorkoutViewModel
 
 class ViewModelFactory private constructor(
@@ -18,7 +20,6 @@ class ViewModelFactory private constructor(
             when {
                 isAssignableFrom(WorkoutViewModel::class.java) ->
                     WorkoutViewModel(workoutRepository)
-
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
@@ -31,11 +32,11 @@ class ViewModelFactory private constructor(
 
         fun getInstance(application: Application) =
             INSTANCE ?: synchronized(ViewModelFactory::class.java) {
+                val database = WorkoutDatabase.getInstance(application)
                 INSTANCE ?: ViewModelFactory(WorkoutRepository.getInstance(
-                    WorkoutDataSource.getInstance(AppExecutors(), database.taskDao())))
+                    WorkoutLocalDataSource.getInstance(AppExecutors(), database.workoutDao())))
                     .also { INSTANCE = it }
             }
-
 
         @VisibleForTesting
         fun destroyInstance() {

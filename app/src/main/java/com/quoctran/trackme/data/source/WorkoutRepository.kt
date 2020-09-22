@@ -1,16 +1,18 @@
 package com.quoctran.trackme.data.source
 
+import com.quoctran.trackme.data.source.local.WorkoutLocalDataSource
+
 class WorkoutRepository(
-    val workoutDataSource: WorkoutDataSource
+    val workoutLocalDataSource: WorkoutLocalDataSource
 ) : WorkoutDataSource{
 
     companion object {
 
         private var INSTANCE: WorkoutRepository? = null
 
-        @JvmStatic fun getInstance(workoutDataSource: WorkoutDataSource) =
+        @JvmStatic fun getInstance(workoutLocalDataSource: WorkoutLocalDataSource) =
             INSTANCE ?: synchronized(WorkoutRepository::class.java) {
-                INSTANCE ?: WorkoutRepository(workoutDataSource)
+                INSTANCE ?: WorkoutRepository(workoutLocalDataSource)
                     .also { INSTANCE = it }
             }
         @JvmStatic fun destroyInstance() {

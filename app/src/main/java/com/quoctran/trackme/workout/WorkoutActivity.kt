@@ -7,18 +7,23 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.quoctran.trackme.R
+import com.quoctran.trackme.obtainViewModel
+import com.quoctran.trackme.replaceFragmentInActivity
 
-class WorkoutActivity : AppCompatActivity(){
+class WorkoutActivity : AppCompatActivity() {
 
     private lateinit var workoutViewModel: WorkoutViewModel
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout)
+        workoutViewModel = obtainViewModel()
 
+        replaceFragmentInActivity(findOrCreateViewFragment(), R.id.fl_container)
     }
+
+    private fun findOrCreateViewFragment() =
+        supportFragmentManager.findFragmentById(R.id.fl_container) ?: WorkoutFragment.newInstance()
+
+    private fun obtainViewModel(): WorkoutViewModel = obtainViewModel(WorkoutViewModel::class.java)
 }

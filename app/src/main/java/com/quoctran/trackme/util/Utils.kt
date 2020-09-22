@@ -17,11 +17,3 @@ fun Location.getLocationTitle(context: Context): String{
         R.string.location_updated,
         DateFormat.getDateInstance().format(Date()))
 }
-
-fun requestingLocationUpdates(): Boolean {
-    return
-}
-
-fun updateLocationUpdates(Bo){
-    return WorkoutPreference.isLocationUpdate!!
-}
