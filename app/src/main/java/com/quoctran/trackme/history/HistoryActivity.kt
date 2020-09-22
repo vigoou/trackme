@@ -1,4 +1,8 @@
 package com.quoctran.trackme.history
 
-class HistoryActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class HistoryActivity: AppCompatActivity(){
+
+
 }

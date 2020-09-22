@@ -1,4 +1,4 @@
 package com.quoctran.trackme.data;
 
-object Node {
+object History {
 }

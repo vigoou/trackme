@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TrackMe</string>
+    <string name="location_updated">Location Updated: %1$s</string>
+    <string name="launch_app">Launch App</string>
+    <string name="remove_workout">Remove workout</string>
+
 </resources>
